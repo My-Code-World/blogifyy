@@ -17,6 +17,12 @@ const {
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+app.use((req, res, next) => {
+  res.setHeader('Keep-Alive', 'timeout=120, max=1000');
+  next();
+});
+
+
 mongoose
   .connect("mongodb://127.0.0.1:27017/blogify",{useNewUrlParser: true, useUnifiedTopology: true})
   .then((e) => console.log("MongoDB Connected"));
@@ -40,4 +46,4 @@ app.get("/", async (req, res) => {
 app.use("/user", userRoute);
 app.use("/blog", blogRoute);
 
-app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Server Started at PORT:${PORT}`));
