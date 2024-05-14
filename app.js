@@ -16,7 +16,7 @@ const {
 
 const app = express();
 const PORT = process.env.PORT || 8000;
-
+mongoose.set('strictQuery', true);
 app.use((req, res, next) => {
   res.setHeader('Keep-Alive', 'timeout=120, max=1000');
   next();
