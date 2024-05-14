@@ -24,9 +24,9 @@ app.use((req, res, next) => {
 
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/blogify",{useNewUrlParser: true, useUnifiedTopology: true})
+  .connect(process.env.MONGO_URL,{useNewUrlParser: true, useUnifiedTopology: true})
   .then((e) => console.log("MongoDB Connected"));
-console.log(process.env.MONGO_URL);
+
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
